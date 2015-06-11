@@ -1,0 +1,144 @@
+﻿@using System.Web.Mvc.Html
+@model PrintStat.Models.ViewModels.ModelView
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link href="~/Content/themes/multi-select.css" rel="stylesheet"/>
+
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"> </script>
+@Scripts.Render("~/bundles/multiselect")
+@Scripts.Render("~/bundles/quicksearch")
+<script src="~/Scripts/EditModelScript.js"></script>
+
+@using (Html.BeginForm("EditModel", "Model", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <fieldset>
+        @Html.HiddenFor(p=>p.ID)
+        <h2>Редактирование модели</h2>
+        <div class="control-group">
+            <label class="control-label" for="ManufacturerID">
+                Производитель
+            </label>
+            <div class="styled-select">
+                @Html.DropDownList("ManufacturerID", new SelectList(ViewBag.Manufacturers, "ID", "Name"))
+            </div>
+            <label class="control-label" for="Name">
+                Наименование модели
+            </label>
+            <div class="controls">
+                @Html.TextBox("Name", Model.Name)
+                @Html.ValidationMessage("Name")
+            </div>
+            <label class="control-label" for="DeviceTypeID">
+                Тип устройства
+            </label>
+            <div class="styled-select">
+                @Html.DropDownList("DeviceTypeID", new SelectList(ViewBag.DeviceTypes, "ID", "Name"))
+            </div>
+            <label class="control-label" for="PrintKindID">
+                Вид печати
+            </label>
+            <div class="styled-select">
+                @Html.DropDownList("PrintKindID", new SelectList(ViewBag.PrintKinds, "ID", "Name"))
+            </div>
+
+
+            <div id="partialModConsumable1">
+                @{Html.RenderPartial("partialModelConsumable", Model.Consumables);}
+            </div>
+            <br/>
+            <div id="tabs" style="width: 50%">
+                <ul>
+                    @*<li><a href="#tabs-1">Комплектующие</a></li>*@
+                    <li><a href="#tabs-2">Теги</a></li>
+                    <li><a href="#tabs-3">Типоразмер</a></li>
+                    <li><a href="#tabs-4">Тип бумаги</a></li>
+                </ul>
+
+
+                @*<div id="tabs-1">
+                                    <select id="ms1" name="ChosenConsIds" multiple='multiple'>
+                                        @{
+                    foreach (var item in ViewBag.Consumables)
+                    {
+                        if (!Model.Consumables.Contains(item))
+                        {
+                            <option value='@item.ID'>@item.Name</option>
+                        }
+                        else
+                        {
+                            <option selected="selected" value='@item.ID'>@item.Name</option>
+                        }
+                    }
+                                        }
+                                    </select>
+                                </div>*@
+
+                <div id="tabs-2">
+
+                    <select id="ms2" name="ChosenTagIds" multiple='multiple'>
+                        @{
+                            foreach (var item in ViewBag.Tags)
+                            {
+                                if (!Model.Tags.Contains(item))
+                                {
+                                    <option value='@item.ID'>@item.Name</option>
+                                }
+                                else
+                                {
+                                    <option selected="selected" value='@item.ID'>@item.Name</option>
+                                }
+                            }
+                        }
+                    </select>
+
+                </div>
+                <div id="tabs-3">
+                    <select id="ms3" name="ChosenSizePaperIds" multiple='multiple'>
+                        @{
+                            foreach (var item in ViewBag.SizePapers)
+                            {
+                                if (!Model.SizePapers.Contains(item))
+                                {
+                                    <option value='@item.ID'>@item.Name</option>
+                                }
+                                else
+                                {
+                                    <option selected="selected" value='@item.ID'>@item.Name</option>
+                                }
+                            }
+                        }
+                    </select>
+
+
+                </div>
+                <div id="tabs-4">
+                    <select id="ms4" name="ChosenPaperTypeIds" multiple='multiple'>
+                        @{
+                            foreach (var item in ViewBag.PaperTypes)
+                            {
+                                if (!Model.PaperTypes.Contains(item))
+                                {
+                                    <option value='@item.ID'>@item.Name</option>
+                                }
+                                else
+                                {
+                                    <option selected="selected" value='@item.ID'>@item.Name</option>
+                                }
+                            }
+                        }
+                    </select>
+
+                </div>
+
+            </div>
+
+        </div>
+    
+        <br/>
+        <div class="form-actions">
+            <input type="submit" value="Сохранить" data-confirm="Вы действительно хотите внести изменения? n\ Восстановить данные будет невозможно!"/>
+
+
+            @Html.ActionLink("Отмена", "Index", null, null, new {@class = "btn"})
+        </div>
+    </fieldset>
+}

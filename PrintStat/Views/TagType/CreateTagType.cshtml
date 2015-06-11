@@ -1,0 +1,24 @@
+﻿@model PrintStat.Models.ViewModels.TagTypeView
+
+@using (Html.BeginForm("CreateTagType", "TagType", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <fieldset>
+        <div class="control-group">
+            <label class="control-label" for="Name">
+                Наименование типа тега
+            </label>
+
+            <div class="controls">
+                @Html.TextBox("Type", Model.Type)
+                @Html.ValidationMessage("Type")
+            </div>
+        </div>
+      
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                Создать
+            </button>
+            @Html.ActionLink("Отмена", "Index", null, null, new { @class = "btn" })
+        </div>
+    </fieldset>
+}

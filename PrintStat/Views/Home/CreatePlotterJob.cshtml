@@ -1,9 +1,15 @@
-﻿@model PrintStat.Models.ViewModels.JobView
+﻿@using PrintStat
+@using PrintStat.Models.ViewModels
+@model PrintStat.Models.ViewModels.JobView
 
 @using (Html.BeginForm("CreateJob", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
 {
+    <h2>Добавление задания плоттера</h2>
     <fieldset>
         <div class="control-group">
+            @Html.HiddenFor(p => p.EndTime)
+            @Html.HiddenFor(p => p.StartTime)
+            @Html.HiddenFor(p => p.IsManual)
             <table class="tdnoborder" cellpadding="6" cellspacing="8">
                 <tr>
                     <td colspan="2" class="tdnoborder">
@@ -12,7 +18,7 @@
                         </label>
 
                         <div class="controls">
-                            @Html.TextBox("Name", Model.Name)
+                            @Html.TextBox("Name", Model.Name, new {style = "width:640px"})
                             @Html.ValidationMessage("Name")
                         </div>
 
@@ -43,11 +49,11 @@
                 <tr>
                     <td class="tdnoborder">
                         <label class="control-label" for="PrinterID">
-                            Принтер
+                            Плоттер
                         </label>
 
                         <div class="styled-select">
-                            @Html.DropDownList("PrinterID", new SelectList(ViewBag.Plotters, "ID", "Name"))
+                            @Html.DropDownList("DeviceID", new SelectList(ViewBag.Plotters, "ID", "Name"))
                         </div>
                     </td>
                     <td class="tdnoborder">
@@ -65,41 +71,44 @@
                 <tr></tr>
 
                 <tr>
-                    <td class="tdnoborder">
-                        <label class="control-label" for="PaperTypeID">
+                @*<td class="tdnoborder">
+                        <label class="control-label" for="SizePaperID">
                             Типоразмер бумаги
                         </label>
 
                         <div class="controls">
-                            @Html.DropDownList("PaperTypeID", new SelectList(ViewBag.PlotterPapertypes, "ID", "Name"))
-                            @Html.ValidationMessage("PapertypeID")
+                            @Html.DropDownList("SizePaperID", new SelectList(ViewBag.SizePaper, "ID", "Name"))
+                            @Html.ValidationMessage("SizePaperID")  
+                        </div>
+                    </td>*@
+                @*  <td class="tdnoborder">
+    <table class="tdnoborder" cellpadding="6" cellspacing="8">
+                *@
+                <tr>
+                    <td class="tdnoborder">
+                        <label class="control-label" for="Width_cm">
+                            Ширина, см
+                        </label>
+
+                        <div class="controls">
+                            @Html.TextBox("Width_cm", Model.Width_cm)
+                            @*@Html.TextBox("Widtn_cm", (ViewBag.SizePaper.FirstOrDefault(p => p.ID == )))*@
+
+                            @Html.ValidationMessage("Width_cm")
                         </div>
                     </td>
                     <td class="tdnoborder">
-                        <table class="tdnoborder" cellpadding="6" cellspacing="8">
-                            <tr>
-                                <td class="tdnoborder">
-                                    <label class="control-label" for="Width_cm">
-                                        Ширина, см
-                                    </label>
-
-                                    <div class="controls">
-                                        @Html.TextBox("Width_cm", Model.Width_cm)
-                                        @Html.ValidationMessage("Width_cm")
-                                    </div>
-                                </td>
-                                <td class="tdnoborder">
-                                    <label class="control-label" for="Height_cm">
-                                        Длина, см
-                                    </label>
-                                    <div class="controls">
-                                        @Html.TextBox("Height_cm", Model.Height_cm)
-                                        @Html.ValidationMessage("Height_cm")
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+                        <label class="control-label" for="Height_cm">
+                            Длина, см
+                        </label>
+                        <div class="controls">
+                            @Html.TextBox("Height_cm", Model.Height_cm)
+                            @Html.ValidationMessage("Height_cm")
+                        </div>
                     </td>
+                </tr>
+                @*  </table>
+                    </td>*@
                 <tr>
                     <td class="tdnoborder">
 
@@ -127,7 +136,7 @@
 
 
             </table>
-         </div>
+        </div>
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">
                 Создать

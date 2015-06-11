@@ -1,0 +1,27 @@
+﻿@model PrintStat.Models.ViewModels.ManufacturerView
+
+@using (Html.BeginForm("EditManufacturer", "Manufacturer", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <h2>
+        Редактирование производителя
+    </h2>
+    <fieldset>
+        <div class="control-group">
+            <label class="control-label" for="Name">
+                Наименование производителя
+            </label>
+
+            <div class="controls">
+                @Html.TextBox("Name", Model.Name)
+                @Html.ValidationMessage("Name")
+            </div>
+        </div>
+      
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                Изменить
+            </button>
+            @Html.ActionLink("Отмена", "Index", null, null, new { @class = "btn" })
+        </div>
+    </fieldset>
+}

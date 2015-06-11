@@ -1,0 +1,24 @@
+﻿                <div id="viewTag" style="display: block">
+
+                    <div class="listTag">
+                        
+                        <section class=""></section>
+                        @foreach (var tag in ViewBag.Tags)
+                        {
+                          <input type="checkbox" name="selectedObject" value="@tag.Name"/>@tag.Name
+                            <br/>
+                        }
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-primary">
+                            ►
+                        </button>
+                        <br />
+                        <button type="button" class="btn btn-primary">
+                            ◄
+                        </button>
+                    </div>
+                    <div class="choiceTag">
+
+                    </div>
+                </div>

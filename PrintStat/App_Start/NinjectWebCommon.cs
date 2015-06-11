@@ -64,7 +64,7 @@ namespace PrintStat.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<PrinterStatDataContext>().ToMethod(c => new PrinterStatDataContext(ConfigurationManager.ConnectionStrings["PrinterStatConnectionString"].ConnectionString));
+            kernel.Bind<PrintStatDataDataContext>().ToMethod(c => new PrintStatDataDataContext(ConfigurationManager.ConnectionStrings["PrinterStatConnectionString"].ConnectionString));
             kernel.Bind<IRepository>().To<SQLRepository>().InRequestScope();
             kernel.Bind<IMapper>().To<CommonMapper>().InSingletonScope();
         }        

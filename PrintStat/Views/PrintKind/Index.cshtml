@@ -1,0 +1,45 @@
+﻿@model IList<PrintStat.PrintKind>
+@{
+    ViewBag.Title = "Виды печати";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Виды печати</h2>
+
+<p>
+    <div class="menu">
+        <a href="@Url.Action("CreatePrintKind", "PrintKind")">Добавить вид печати</a>
+    </div>
+
+</p>
+
+<p>
+    <table>
+        <thead>
+            <tr>
+                <th>Наименование</th>
+
+                <th>Редакция</th>
+                <th>Удаление</th>
+            </tr>
+        </thead>
+        @foreach (var printkind in Model)
+        {
+            <tr>
+                <td width="200">
+                    @printkind.Name
+                </td>
+
+
+                <td width="80">
+                    <a href="@Url.Action("EditPrintKind", "PrintKind", new { id = @printkind.ID })">●</a>
+                </td>
+                <td width="80">
+                    <a href="@Url.Action("DeletePrintKind", "PrintKind", new { id = @printkind.ID })"><font color="red">●</font></a>
+                </td>
+            </tr>
+        }
+    </table>
+</p>
+
+

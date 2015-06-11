@@ -1,0 +1,127 @@
+﻿@using System.Drawing
+@model PrintStat.Models.ViewModels.DeviceConsumableView
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#datetimepicker').datetimepicker(
+        {
+            lang: 'ru',
+            mask: true
+        });
+    })
+</script>
+
+<input id="datetimepicker" type="text" style="width: 150px;">
+@*Html.ListBoxFor(p=>p.deviceID,)*@
+<h4>
+    Используемые в настоящий момент комплектующие
+</h4>
+
+
+
+
+
+    <table>
+        <thead>
+            <tr>
+
+                <th>Наименование комплектующего</th>
+                <th>Дата добавления</th>
+                <th>Дата прекращения работы</th>
+                <th>Действие</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.AllDevCons != null)
+            {
+                foreach (var item in Model.AllDevCons.Where(p => p.Uses == true))
+                {
+                    <tr>
+                        <td>
+                            @item.Type @item.Name
+                        </td>
+
+                        <td>
+                            @item.DateInstalled
+                        </td>
+
+                        <td>
+                            @item.DateEnd 
+                        </td>
+
+                        <td>
+                            @if (item.DateEnd == null)
+                            {
+
+                                @Ajax.ActionLink(
+                                "Прекратить использование",
+                                "GetDeviceConsumble",
+                                "Device",
+                                new { deviceId = @Model.deviceID, id = @item.ID, option = 1 },
+                                          new AjaxOptions { UpdateTargetId = "partialDevConsumable" }
+                                )
+                            }
+                            else
+                            {
+                                
+                                @Ajax.ActionLink(
+                                     "Заменить",
+                                "GetDeviceConsumble",
+                                "Device",
+                                new { deviceId = @Model.deviceID, id = @item.ID, option = 2 },
+                                          new AjaxOptions { UpdateTargetId = "partialDevConsumable" }
+                                )
+                            }
+                        </td>
+
+
+                    </tr>
+
+                }
+            }
+        </tbody>
+    </table>
+
+    <h4>
+        Комплектующие, вышедшие из эксплуатации
+    </h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Наименование комплектующего</th>
+                <th>Дата добавления</th>
+                <th>Дата прекращения работы</th>
+                <th>Счетчик бумаги на задания</th>
+                <th>Счетчик бумаги SNMP</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.AllDevCons.Where(p => p.Uses == false) != null)
+            {
+                foreach (var item in Model.AllDevCons.Where(p => p.Uses == false))
+                {
+                    <tr>
+                        <td>
+                            @item.Type @item.Name
+                        </td>
+
+                        <td>
+                            @item.DateInstalled
+                        </td>
+
+                        <td>
+                            @item.DateEnd
+                        </td>
+
+                        <td>
+                            @item.Count
+                        </td>
+                        <td>
+                            @item.CountSnmp
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+

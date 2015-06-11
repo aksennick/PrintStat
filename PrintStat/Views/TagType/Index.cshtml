@@ -1,0 +1,46 @@
+﻿@model IList<PrintStat.TagType>
+@{
+    ViewBag.Title = "Типы тегов";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Теги</h2>
+
+<p>
+    <div class="menu">
+        <a href="@Url.Action("CreateTagType", "TagType")">Добавить тип тега</a>
+    </div>
+
+</p>
+
+<p>
+    <table>
+        <thead>
+            <tr>
+                
+                <th>Тип</th>
+
+                <th>Редакция</th>
+                <th>Удаление</th>
+            </tr>
+        </thead>
+        @foreach (var tagtype in Model)
+        {
+            <tr>
+                <td width="200">
+                    @tagtype.Type
+                </td>
+
+
+                <td width="80">
+                    <a href="@Url.Action("EditTagType", "Tagtype", new {id = @tagtype.ID})">●</a>
+                </td>
+                <td width="80">
+                    <a href="@Url.Action("DeleteTagType", "TagType", new {id = @tagtype.ID})"><font color="red">●</font></a>
+                </td>
+            </tr>
+        }
+    </table>
+</p>
+
+

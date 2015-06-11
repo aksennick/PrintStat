@@ -1,0 +1,64 @@
+﻿@model PrintStat.Models.ViewModels.ConsumableView
+<script src="~/Scripts/Consumable.js"></script>
+
+@using (Html.BeginForm("EditConsumable", "Consumable", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <h2>
+        Редактирование комплектующего
+    </h2>
+    <fieldset>
+        <div class="control-group">
+            <label class="control-label" for="TypeConsumableID">
+                Тип комплектующего
+            </label>
+
+            <div class="styled-select">
+                @Html.DropDownList("TypeConsumableID", new SelectList(ViewBag.TypeConsumable, "ID", "Name"))
+                @Html.ValidationMessage("TypeConsumableID")
+            </div>
+
+            <label class="control-label" for="Name">
+                Наименование
+            </label>
+
+            <div class="controls">
+                @Html.TextBox("Name", Model.Name)
+                @Html.ValidationMessage("Name")
+            </div>
+
+            <div id="color" display:none>
+                <label class="control-label" for="Name">
+                    Цвет картриджа
+                </label>
+
+                <div class="styled-select">
+                    @Html.DropDownList("CartridgeColorID", new SelectList(ViewBag.CartridgeColor, "ID", "Name"))
+                </div>
+            </div>
+
+            <label class="control-label" for="Endurance">
+                Рабочий ресурс
+            </label>
+            <div class="controls">
+                @Html.TextBox("Endurance", Model.Endurance)
+
+            </div>
+
+            <label class="control-label" for="ShortName">
+                Краткое название
+            </label>
+            <div class="controls">
+                @Html.TextBox("ShortName", Model.ShortName)
+            </div>
+
+
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                Изменить
+            </button>
+            @Html.ActionLink("Отмена", "Index", null, null, new { @class = "btn" })
+        </div>
+    </fieldset>
+}

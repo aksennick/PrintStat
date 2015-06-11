@@ -1,0 +1,23 @@
+﻿@model PrintStat.Models.ViewModels.DeviceConsumableView
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/datetimepicker")
+
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"> </script>
+
+
+
+
+
+@using (Html.BeginForm("EditDeviceConsumable", "Device", FormMethod.Post, new {@class = "form-horizontal"}))
+{
+    <fieldset>
+        <h2>
+            Комплектующие @ViewBag.DeviceName
+        </h2>
+
+        <div id="partialDevConsumable">
+         @{Html.RenderPartial("partialDeviceConsumable", Model);}
+        </div>
+    </fieldset>
+}

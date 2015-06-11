@@ -24,32 +24,32 @@ namespace PrintStat.Controllers
             }
         }
 
-        public ActionResult Index()
-        {
+        //public ActionResult Index()
+        //{
 
-            var settings = Repository.Setup.FirstOrDefault();
+        //    var settings = Repository.Setup.FirstOrDefault();
 
-            SettingsView settingsView;
-            if (settings != null)
-                settingsView = (SettingsView)ModelMapper.Map(settings, typeof(Setup), typeof(SettingsView));
-            else
-                settingsView =  new SettingsView();
+        //    SettingsView settingsView;
+        //    if (settings != null)
+        //        settingsView = (SettingsView)ModelMapper.Map(settings, typeof(Setup), typeof(SettingsView));
+        //    else
+        //        settingsView =  new SettingsView();
 
-            ViewBag.Protocols = Protocols;  
-            return View(settingsView);
-        }
+        //    ViewBag.Protocols = Protocols;  
+        //    return View(settingsView);
+        //}
 
 
-        [HttpPost]
-        public ActionResult SaveSettings(SettingsView settingsView)
-        {
-            if (ModelState.IsValid)
-            {
-                var settings = (Setup)ModelMapper.Map(settingsView, typeof(SettingsView), typeof(Setup));
-                Repository.SaveSettings(settings);
-                return RedirectToAction("Index");
-            }
-            return View(settingsView);
-        }
+      //  [HttpPost]
+        //public ActionResult SaveSettings(SettingsView settingsView)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var settings = (Setup)ModelMapper.Map(settingsView, typeof(SettingsView), typeof(Setup));
+        //        Repository.SaveSettings(settings);
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(settingsView);
+        //}
     }
 }

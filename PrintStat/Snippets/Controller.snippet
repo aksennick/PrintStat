@@ -1,0 +1,103 @@
+﻿<CodeSnippets
+    xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0" >
+    <Header>
+      <Title>
+        controll
+      </Title>
+      <Shortcut>controll</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>Table</ID>
+          <ToolTip>Table name for create.</ToolTip>
+          <Default>Table</Default>
+        </Literal>
+      </Declarations>
+
+      <Code Language="CSharp">
+        <![CDATA[
+    public class $Table$Controller : BaseController
+    {
+        //
+        // GET: /CartridgeColor/
+
+        public ActionResult Index()
+        {
+            var _$Table$ = Repository.$Table$s.ToList();
+            return View(_$Table$);
+        }
+
+        [HttpGet]
+        public ActionResult Create$Table$()
+        {
+            var new$Table$View = new $Table$View();
+            return View(new$Table$View);
+        }
+
+        [HttpPost]
+        public ActionResult Create$Table$($Table$View _$Table$View)
+        {
+            var any$Table$ = Repository.$Table$s.Any(p => string.Compare(p.Name, _$Table$View.Name) == 0);
+            if (any$Table$)
+            {
+                ModelState.AddModelError("Name", "$Table$ с таким наименованием уже существует");
+            }
+
+            if (ModelState.IsValid)
+            {
+
+                var _$Table$ = ($Table$)ModelMapper.Map(_$Table$View, typeof($Table$View), typeof($Table$));
+                Repository.Create$Table$(_$Table$);
+                return RedirectToAction("Index");
+            }
+
+            return View(_$Table$View);
+        }
+
+        [HttpGet]
+        public ActionResult Edit$Table$(int? id)
+        {
+            var _$Table$ = Repository.$Table$s.FirstOrDefault(p => p.ID == id);
+            if (_$Table$ != null)
+            {
+                var _$Table$View = ($Table$View)ModelMapper.Map(_$Table$, typeof($Table$), typeof($Table$View));
+                return View(_$Table$View);
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Edit$Table$($Table$View _$Table$View)
+        {
+            if (ModelState.IsValid)
+            {
+                var _$Table$ = Repository.$Table$s.FirstOrDefault(p => p.ID == _$Table$View.ID);
+                ModelMapper.Map(_$Table$View, _$Table$, typeof($Table$View), typeof($Table$));
+                Repository.Update$Table$(_$Table$);
+
+                return RedirectToAction("Index");
+            }
+
+            return View(_$Table$View);
+        }
+
+
+        [HttpGet]
+        public ActionResult Delete$Table$(int? id)
+        {
+            var _$Table$ = Repository.$Table$s.FirstOrDefault(p => p.ID == id);
+            if (_$Table$ != null)
+            {
+                Repository.Remove$Table$(_$Table$);
+            }
+            return RedirectToAction("Index");
+        }
+
+    }
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

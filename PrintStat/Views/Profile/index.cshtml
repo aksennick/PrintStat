@@ -1,0 +1,40 @@
+﻿@model IList<PrintStat.Profile>
+@{
+    ViewBag.Title = "Профили настроек";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Профили настроек</h2>
+<p>
+    <div class="menu">
+        <a href="@Url.Action("CreateProfile", "Profile")">Добавить профиль настроек</a>
+    </div>
+</p>
+<p>
+    <table>
+        <thead>
+            <tr>
+                <th>Наименование</th>
+                <th>Редакция</th>
+                <th>Удаление</th>
+
+            </tr>
+        </thead>
+        @foreach (var profile in Model)
+        {
+            <tr>
+                <td width="400">
+                    @profile.Name
+                </td>
+
+                <td width="80">
+                    <a href="@Url.Action("EditProfile", "Profile", new {id = @profile.ID})">●</a>
+                </td>
+                <td width="80">
+                    <a href="@Url.Action("DeleteProfile", "Profile", new {id = @profile.ID})"><font color="red">●</font></a>
+                </td>
+
+            </tr>
+        }
+    </table>
+
+</p>

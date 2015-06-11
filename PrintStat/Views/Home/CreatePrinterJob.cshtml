@@ -1,9 +1,13 @@
 ﻿@model PrintStat.Models.ViewModels.JobView
-
+<script src="~/Scripts/AddPrinterJob.js"></script>
 @using (Html.BeginForm("CreateJob", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
 {
+    <h2>Добавление задания принтера</h2>
     <fieldset>
         <div class="control-group">
+            @Html.HiddenFor(p => p.EndTime)
+            @Html.HiddenFor(p=>p.StartTime)
+            @Html.HiddenFor(p=>p.IsManual)
             <table class="tdnoborder" cellpadding="6" cellspacing="8">
                 <tr>
                     <td colspan="2" class="tdnoborder">
@@ -12,7 +16,7 @@
                         </label>
 
                         <div class="controls">
-                            @Html.TextBox("Name", Model.Name)
+                            @Html.TextBox("Name", Model.Name, new { style = "width:640px" })
                             @Html.ValidationMessage("Name")
                         </div>
 
@@ -27,6 +31,7 @@
 
                         <div class="styled-select">
                             @Html.DropDownList("UserTabNumber", new SelectList(ViewBag.UserEmployees, "TabNumber", "Name"))
+                            @*, Environment.UserName)*@
                         </div>
                     </td>
                     <td class="tdnoborder">
@@ -42,12 +47,12 @@
 
                 <tr>
                     <td class="tdnoborder">
-                        <label class="control-label" for="PrinterID">
+                        <label class="control-label" for="DeviceID">
                             Принтер
                         </label>
 
                         <div class="styled-select">
-                            @Html.DropDownList("PrinterID", new SelectList(ViewBag.Printers, "ID", "Name"))
+                            @Html.DropDownList("DeviceID", new SelectList(ViewBag.Printers, "ID", "Name"),"Выберите принтер")
                         </div>
                     </td>
                     <td class="tdnoborder">
@@ -65,19 +70,26 @@
                 <tr></tr>
 
                 <tr>
-                    <td class="tdnoborder">
-                        <label class="control-label" for="PaperTypeID">
-                            Типоразмер бумаги
-                        </label>
+                <td class="tdnoborder">
+                    <label class="control-label" for="SizePaperID">
+                        Формат бумаги
+                    </label>
 
-                        <div class="controls">
-                            @Html.DropDownList("PaperTypeID", new SelectList(ViewBag.PrinterPapertypes, "ID", "Name"))
-                            @Html.ValidationMessage("PapertypeID")
-                        </div>
-                    </td>
-                    <td class="tdnoborder">
-                    
-                    </td>
+                    <div class="controls">
+                        @Html.DropDownList("SizePaperID", new SelectList(Enumerable.Empty<SelectListItem>(), "ID", "Name"))
+                        @Html.ValidationMessage("SizePaperID")
+                    </div>
+                </td>
+                <td class="tdnoborder">
+                    <label class="control-label" for="PaperTypeID">
+                        Тип бумаги
+                    </label>
+
+                    <div class="controls">
+                        @Html.DropDownList("PaperTypeID", new SelectList(Enumerable.Empty<SelectListItem>(), "ID", "Name"))
+                        @Html.ValidationMessage("PaperTypeID")
+                    </div>
+                </td>
                 <tr>
                     <td class="tdnoborder">
 
@@ -105,7 +117,7 @@
 
 
             </table>
-         </div>
+        </div>
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">
                 Создать

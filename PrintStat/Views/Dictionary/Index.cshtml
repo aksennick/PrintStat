@@ -4,24 +4,62 @@
 
 <h2>Справочники</h2>
 
+<h4>
+    Устройство
+</h4>
 <p>
-    <a href="@Url.Action("Index", "Paper")">Типоразмеры бумаги</a>
-    <br>
+    <a href="@Url.Action("Index", "Manufacturer")">Производители</a>
     <a href="@Url.Action("Index", "DeviceType")">Виды устройств</a>
-    <br>
-    <a href="@Url.Action("Index", "DeviceType")">Цвета картриджей</a>
-    <br>
-    <a href="@Url.Action("Index", "DeviceType")">Виды печати</a>
-    <br>
-    <a href="@Url.Action("Index", "DeviceType")">Сотрудник</a>
-    <br>
-    <a href="@Url.Action("Index", "DeviceType")">Отдел</a>
-    <br>
-    <a href="@Url.Action("Index", "DeviceType")">Приложение</a>
-    <br>
-    <a href="@Url.Action("Index", "DeviceType")">Вид печати</a>
-
-
+    <a href="@Url.Action("Index", "PrintKind")">Виды печати</a>
 </p>
+<h4>
+    Комплектующие/расходные матрериалы
+</h4>
+<p>
+    <a href="@Url.Action("Index", "TypeConsumable")">Типы заменяемыех комплектующих</a>
+    <a href="@Url.Action("Index", "CartridgeColor")">Цвета картриджей</a>
+</p>
+<h4>
+    Задание печати
+</h4>
+<p>
+    <a href="@Url.Action("Index", "Application")">Приложения</a>
+    <a href="@Url.Action("Index", "PaperType")">Типы бумаги</a>
+    <a href="@Url.Action("Index", "SizePaper")">Формат бумаги</a>
+</p>
+<h4>
+    Настройки
+</h4>
+<p>
+    <a href="@Url.Action("Index", "FieldSetting")">Поля настроек</a>
+    <a href="@Url.Action("Index", "TagType")">Типы тегов</a>
+    <a href="@Url.Action("Index", "Tag")">Теги</a>
+</p>
+@*
+    <p>
+        <a href="@Url.Action("Index", "Manufacturer")">Производители</a>
+        <br>
+        <a href="@Url.Action("Index", "PaperType")">Типы бумаги</a>
+        <br>
+        <a href="@Url.Action("Index", "SizePaper")">Типоразмеры бумаги</a>
+        <br>
+        <a href="@Url.Action("Index", "DeviceType")">Виды устройств</a>
+        <br>
+        <a href="@Url.Action("Index", "CartridgeColor")">Цвета картриджей</a>
+        <br>
+        <a href="@Url.Action("Index", "PrintKind")">Виды печати</a>
+        <br>
+        <a href="@Url.Action("Index", "FieldSetting")">Поля настроек</a>
+        <br>
+        <a href="@Url.Action("Index", "Application")">Приложения</a>
+        <br>
+        <a href="@Url.Action("Index", "TypeConsumable")">Типы заменяемыех комплектующих</a>
+        <br>
 
+        <a href="@Url.Action("Index", "Tag")">Теги</a>
+        <br>
+        <a href="@Url.Action("Index", "TagType")">Типы тегов</a>
+        <br>
+    </p>
 
+*@

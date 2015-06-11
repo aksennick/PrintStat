@@ -1,0 +1,51 @@
+﻿@model IList<PrintStat.CartridgeColor>
+@{
+    ViewBag.Title = "Цвета картриджей";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Цвета картриджей</h2>
+
+<p>
+    <div class="menu">
+        <a href="@Url.Action("CreateCartridgeColor", "CartridgeColor")">Добавить цвет картриджей</a>
+    </div>
+
+</p>
+
+<p>
+    <table>
+        <thead>
+            <tr>
+                <th>Наименование</th>
+                <th>Краткое название</th>
+
+
+                <th>Редакция</th>
+                <th>Удаление</th>
+            </tr>
+        </thead>
+        @foreach (var val in Model)
+        {
+            <tr>
+                <td width="200">
+                    @val.Name
+                </td>
+                <td width="200">
+                    @val.ShortName
+                </td>
+
+                
+                <td width="80">
+                    <a href="@Url.Action("EditCartridgeColor", "CartridgeColor", new { id = @val.ID })">●</a>
+                </td>
+                <td width="80">
+                    <a href="@Url.Action("DeleteCartridgeColor", "CartridgeColor", new { id = @val.ID })"><font color="red">●</font></a>
+                </td>
+            </tr>
+        }
+    </table>
+</p>
+
+
+

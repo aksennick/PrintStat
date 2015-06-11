@@ -1,0 +1,104 @@
+﻿@model List<PrintStat.Consumable>
+
+<script type="text/javascript">
+
+    $('#partialModConsumable').ready(function() {
+        $('input#search').autocomplete({
+            source: '/Consumable/AutocompleteConsumble',
+            minLength: 0
+        }).focus(function() {
+            $(this).autocomplete("search");
+        });
+    });
+
+  
+</script>
+
+
+
+
+<h4>
+    Прикрепление комплектующих и расходных материалов к модели устройства
+</h4>
+
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>Расходный материал</th>
+
+            <th>Действие</th>
+        </tr>
+        </thead>
+
+        @{
+            if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>
+                           
+                                @Ajax.ActionLink(
+                                         "удалить",
+                                         "DelModelCons",
+                                         "Model",
+                                            new { idMod = ViewBag.ID, idCons = @item.ID },
+                    new AjaxOptions { UpdateTargetId = "partialModConsumable1"}//, Confirm = "Вы уверены? \n Данные связанные с этим комплектующим будут удалены! " }
+                                         
+                                         )
+                           
+
+
+                        </td>
+                    </tr>
+
+                }
+            }
+        }
+
+        <tr>
+            <td>
+                @Html.TextBox("search", "", new {  placeholder = "Добавить " })
+
+            </td>
+            <td>
+                <img id="add" class="ui-icon ui-icon-plus" alt="" />
+
+                <script>
+                    $(document).ready(function () {
+                        $("#add").on("click", function () {
+                            var val = $('#search').val();
+                            var tdata = $('#form1').serialize();
+                            $.ajax({
+                                url: "/Model/AddConsToModel",
+                                type: "GET",
+                                data: {name:val}
+                            })
+                            .done(function (partialViewResult) {
+                                $("#partialModConsumable1").html(partialViewResult);
+                            });
+                        });
+                    });
+                </script>
+                @*@Ajax.ActionLink(
+                    "Добавить",
+                    "AddConsToModel",
+                    "Model",
+                    new {Model, Name = Model.search},
+                    new AjaxOptions {UpdateTargetId = "partialModConsumable1"}
+                    )*@
+
+            </td>
+        </tr>
+
+    </table>
+
+</div>
+
+
+
+
+
+

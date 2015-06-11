@@ -12,6 +12,7 @@ namespace PrintStat.Models.ViewModels
         public int ID { get; set; }
         [Display (Name = "Наименование")]
         [Required(ErrorMessage = "Введите наименование")]
+
         public string Name { get; set; }
     }
 }

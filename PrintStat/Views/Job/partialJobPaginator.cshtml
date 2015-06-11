@@ -1,0 +1,96 @@
+﻿@using PagedList.Mvc
+@model  PagedList.IPagedList<PrintStat.Job>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", "Home", new { page = page, countJob = ViewBag.pageCount }),
+
+PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+{
+    LinkToFirstPageFormat = "«",
+    LinkToPreviousPageFormat = "Назад",
+    LinkToNextPageFormat = "Вперед",
+    LinkToLastPageFormat = "»"
+}
+
+, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "CurrentContent" }))
+
+
+
+@*@Html.DropDownList("Count",new SelectList(new Dictionary<int, string> { { 1, "По умолчанию (30)" }, { 10, "10 заданий" }, { 15, "15 заданий" },{50,"50 заданий"} }, "Key", "Value", ViewBag.pageCount))*@
+
+
+<p>
+    <table width="1200">
+        <thead>
+            <tr>
+
+
+                <th>Наименование</th>
+                <th>Отправитель</th>
+                <th>Принтер</th>
+                <th>Дата выполнения</th>
+                <th>Приложение</th>
+
+                <th>Редакция</th>
+                @*<th>Просмотр</th>*@
+                <th>Удаление</th>
+                
+            </tr>
+        </thead>
+        @foreach (var Job in Model)
+        {
+
+            {
+                <tr>
+
+                    <td width="200" style="text-align: left; padding: 2px">
+                        <font size="2">
+                            <b> @Job.Name </b>
+                        </font>
+                    </td>
+
+                    <td width="100">
+                        <font size="1">
+                            @Job.Employee
+                        </font>
+                    </td>
+
+                    <td width="120">
+                        <font size="1">
+                            @Job.Device.Name
+                        </font>
+                    </td>
+
+                    <td width="120">
+                        <font size="1">
+                            @Job.StartTime
+                        </font>
+                    </td>
+                    <td width="120">
+                        <font size="1">
+                            @Job.Application.Name
+                        </font>
+                    </td>
+
+                    <td width="80">
+                        @if (@Job.DeviceType.ID == 1)
+                        {
+                            <a href="@Url.Action("EditPlotterJob", "Home", new { id = @Job.ID })">●</a>
+                        }
+
+                        @if (@Job.DeviceType.ID == 2)
+                        {
+                            <a href="@Url.Action("EditPrinterJob", "Home", new { id = @Job.ID })">●</a>
+                        }
+                    </td>
+                    @*        <td width="80">
+                            <a href="@Url.Action("ViewJob", "Home", new { id = @Job.ID })"><font color="blue">●</font></a>
+                        </td>
+                    *@
+                    <td width="80">
+                        <a href="@Url.Action("DeleteJob", "Home", new { id = @Job.ID })"><font color="red">●</font></a>
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</p>

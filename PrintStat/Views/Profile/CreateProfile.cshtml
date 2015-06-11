@@ -1,0 +1,42 @@
+﻿@model PrintStat.Models.ViewModels.ProfileView
+
+
+@using (Html.BeginForm("CreateProfile", "Profile", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <fieldset>
+        <h2>
+            Создание профиля настроек
+        </h2>
+
+        <div class="control-group">
+            <label class="control-label" for="Name">
+                Наименование профиля
+            </label>
+            <div class="controls">
+                @Html.DropDownListFor(p => p.Name, new SelectList(ViewBag.Names, "Value", "Text"))
+                @Html.ValidationMessage("Name")
+            </div>
+        </div>
+        <div class="editor-field">
+            @{
+    var i = 0;
+    foreach (var item in Model.Setting)
+    {
+        <input type="checkbox" id="[@i]" name="ChosenSetting" value="@item.ID" />
+                <span>@item.Name</span>
+                <br />
+        i++;
+    }
+            }
+
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                Создать
+            </button>
+            @Html.ActionLink("Отмена", "Index", null, null, new { @class = "btn" })
+        </div>
+
+</fieldset>
+}

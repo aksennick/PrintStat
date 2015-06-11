@@ -1,0 +1,41 @@
+﻿@model PrintStat.Models.ViewModels.SizePaperView
+
+@using (Html.BeginForm("EditSizePaper", "SizePaper", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <fieldset>
+        <div class="control-group">
+            <label class="control-label" for="Name">
+                Наименование типа бумаги
+            </label>
+
+            <div class="controls">
+                @Html.TextBox("Name", Model.Name)
+                @Html.ValidationMessage("Name")
+            </div>
+
+            @*<label class="control-label" for="Width_cm">
+                Ширина, см
+            </label>
+            <div class="controls">
+                @Html.TextBox("Width_cm", Model.Width_cm)
+                @Html.ValidationMessage("Width_cm")
+            </div>
+
+
+            <label class="control-label" for="Height_cm">
+                Длина, см
+            </label>
+            <div class="controls">
+                @Html.TextBox("Height_cm", Model.Height_cm)
+                @Html.ValidationMessage("Height_cm")
+            </div>*@
+        </div>
+      
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                Изменить
+            </button>
+            @Html.ActionLink("Отмена", "Index", null, null, new { @class = "btn" })
+        </div>
+    </fieldset>
+}

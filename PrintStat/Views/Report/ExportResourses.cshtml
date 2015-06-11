@@ -1,0 +1,41 @@
+﻿@model PrintStat.Models.ViewModels.ReportSettingsResoursesView
+<link href="~/Content/themes/jquery.tokenize.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.tokenize.js"></script>
+
+
+@using (Html.BeginForm("ExportResourses", "Report", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+
+    <fieldset>
+        <div class="control-group">
+
+
+            <h2>
+                Отчет о использовании расходных материалов
+            </h2>
+
+
+            <select id="tokenize" multiple="multiple" name="ChosenRules" class="tokenize-sample"></select>
+        </div>
+
+        <script type="text/javascript">
+            $('#tokenize').tokenize({
+                datas: "/Report/_GetRule",
+                placeholder: "Выберите критерии создания отчета"
+            });
+        </script>
+
+        <style>
+            .tokenize-sample {
+                width: 600px;
+            }
+        </style>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                Создать отчет
+            </button>
+            @Html.ActionLink("Отмена", "Index", "Home", null, new { @class = "btn" })
+        </div>
+    </fieldset>
+}

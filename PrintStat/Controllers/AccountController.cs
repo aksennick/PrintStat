@@ -69,6 +69,7 @@ namespace PrintStat.Controllers
         //
         // POST: /Account/Register
 
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]

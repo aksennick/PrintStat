@@ -1,0 +1,54 @@
+﻿@model IList<PrintStat.Consumable>
+@{
+    ViewBag.Title = "Заменяемые комплектующие";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Заменяемые комплектующие</h2>
+
+
+
+<p>
+    <div class="menu">
+        <a href="@Url.Action("CreateConsumable", "Consumable")">Добавить комплектующий</a>
+    </div>
+
+</p>
+
+<p>
+    <table>
+        <thead>
+            <tr>
+                <th>Тип</th>
+                <th>Наименование</th>
+                <th>Ресурс</th>
+
+                <th>Редакция</th>
+                <th>Удаление</th>
+            </tr>
+        </thead>
+        @foreach (var component in Model)
+        {
+            <tr>
+                <td width="200">
+                    @component.TypeConsumable.Name
+                </td>
+                <td width="200">
+                    @component.Name
+                </td>
+
+                <td width="200">
+                    @component.Endurance
+                </td>
+                <td width="80">
+                    <a href="@Url.Action("EditConsumable", "Consumable", new { id = @component.ID })">●</a>
+                </td>
+                <td width="80">
+                    <a href="@Url.Action("DeleteConsumable", "Consumable", new { id = @component.ID })"><font color="red">●</font></a>
+                </td>
+            </tr>
+        }
+    </table>
+</p>
+
+

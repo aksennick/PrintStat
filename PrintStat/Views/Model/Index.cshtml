@@ -1,0 +1,59 @@
+﻿@model IList<PrintStat.Model>
+@{
+    ViewBag.Title = "Модели устройств печати";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.ValidationSummary(true)
+<h2>Модели устройств печати</h2>
+
+<p>
+    <div class="menu">
+        <a href="@Url.Action("CreateModel", "Model")">Добавить модель</a>
+        <a href="@Url.Action("Index", "Manufacturer")">Производители</a>
+        <a href="@Url.Action("Index", "DeviceType")">Виды устройства</a>
+        <a href="@Url.Action("Index", "PrintKind")">Типы печати</a>
+    </div>
+
+</p>
+
+<p>
+    <table>
+        <thead>
+            <tr>
+                <th>Производитель</th>
+                <th>Модель</th>
+                <th>Тип устройства</th>
+                <th>Вид печати</th>
+                <th>Редакция</th>
+                <th>Удаление</th>
+            </tr>
+        </thead>
+        @foreach (var _model in Model)
+        {
+            <tr>
+                <td width="200">
+                    @_model.Manufacturer.Name
+                </td>
+                <td width="200">
+                    @_model.Name
+                </td>
+                <td width="200">
+                    @_model.DeviceType.Name
+                </td>
+                <td width="200">
+                    @_model.PrintKind.Name
+                </td>
+                
+                <td width="80">
+                    <a href="@Url.Action("EditModel", "Model", new { id = @_model.ID })">●</a>
+                </td>
+                <td width="80">
+                    <a href="@Url.Action("DeleteModel", "Model", new { id = @_model.ID })"><font color="red">●</font></a>
+                </td>
+            </tr>
+        }
+    </table>
+</p>
+
+
+

@@ -66,13 +66,13 @@
 
                 <tr>
                     <td class="tdnoborder">
-                        <label class="control-label" for="PaperTypeID">
+                        <label class="control-label" for="SizePaperID">
                             Типоразмер бумаги
                         </label>
 
                         <div class="controls">
-                            @Html.DropDownList("PaperTypeID", new SelectList(ViewBag.PlotterPapertypes, "ID", "Name"))
-                            @Html.ValidationMessage("PapertypeID")
+                            @Html.DropDownList("SizePaperID ", new SelectList(ViewBag.SizePaper, "ID", "Name"))
+                            @Html.ValidationMessage("SizePaperID ")
                         </div>
                     </td>
                     <td class="tdnoborder">

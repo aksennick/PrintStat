@@ -1,0 +1,80 @@
+﻿@model IList<PrintStat.Device>
+@{
+    ViewBag.Title = "Принтеры и плоттеры";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Устройства печати</h2>
+<p>
+    <div class="menu">
+        <a href="@Url.Action("CreateDevice", "Device")">Добавить устройство</a>
+        <a href="@Url.Action("Index", "Model")">Модели устройств</a>
+        <a href="@Url.Action("Index", "Consumable")">Комплектующие</a>
+    </div>
+</p>
+<p>
+    <table>
+        <thead>
+            <tr>
+               
+
+                <th>Модель устройства</th>
+                <th>Наименование</th>
+                <th>Серийный номер</th>
+                <th>Поисковая строка</th>
+                <th>Инв. номер</th>
+                <th>Поддержка статистики</th>
+
+                <th>Комплектующие</th>
+                <th>Редакция</th>
+                <th>Удаление</th>
+            </tr>
+        </thead>
+        @foreach (var device in Model)
+        {
+            <tr>
+
+            
+
+                <td width="200">
+                    @device.Model.Manufacturer.Name @device.Model.Name
+                </td>
+                <td width="200">
+                    @device.Name
+                </td>
+                <td width="200">
+                    @device.Sn
+                </td>
+                <td width="200">
+                    @device.SearchString
+                </td>
+
+                <td width="80">
+                    @device.InvNumber
+                </td>
+                <td width="80">
+                    @if (device.StatisticsSupported == true)
+                    {
+                        <b>✔</b>
+                    }
+                    else
+                    {
+                        <b>-</b>
+                        
+                    }
+                </td>
+                <td width="80">
+                    <a href="@Url.Action("EditDeviceConsumable", "Device", new { id = @device.ID })"><font color="green">●</font></a>
+                </td>
+                <td width="80">
+                    <a href="@Url.Action("EditDevice", "Device", new { id = @device.ID })">●</a>
+                </td>
+                <td width="80">
+                    <a href="@Url.Action("DeleteDevice", "Device", new { id = @device.ID })"><font color="red">●</font></a>
+                </td>
+            </tr>
+        }
+        </table>
+        </p>
+
+
+

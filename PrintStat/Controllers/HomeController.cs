@@ -15,16 +15,17 @@ namespace PrintStat.Controllers
     public class HomeController : BaseController
     {
 
-        public void GetMail()
+        public ActionResult GetMail()
         {
-            (new ParseModule.GetData(new DateTime(2015,06,01),DateTime.Now)).GetSource();
+           // (new ParseModule.GetData(new DateTime(2015,06,01),DateTime.Now)).GetSource();
             //return View();
+            return null;
         }
+
         public ActionResult Index(int page=1)
         {
            // var Jobs = Repository.Jobs.OrderByDescending(s => s.EndTime).ToList();
             //var Jobs = Repository.JobPaginators(page).ToList();
-            
 
             ViewBag.pageCount = null;
             

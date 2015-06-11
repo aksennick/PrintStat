@@ -48,6 +48,9 @@
     <Reference Include="DataAnnotationsExtensions">
       <HintPath>..\packages\DataAnnotationsExtensions.1.1.0.0\lib\NETFramework40\DataAnnotationsExtensions.dll</HintPath>
     </Reference>
+    <Reference Include="IntelliTraceContrib">
+      <HintPath>..\packages\IntelliTraceContrib.1.0.2\lib\IntelliTraceContrib.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
@@ -60,6 +63,12 @@
     </Reference>
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.2.1.0\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -208,50 +217,141 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CartridgeColorController.cs" />
+    <Compile Include="Controllers\ConsumableController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\TypeConsumableController.cs" />
+    <Compile Include="Controllers\ComponentController.cs" />
+    <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\DictionaryController.cs" />
     <Compile Include="Controllers\DeviceTypeController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\FieldSettingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobController.cs" />
-    <Compile Include="Controllers\PaperController.cs" />
-    <Compile Include="Controllers\PrinterController.cs" />
+    <Compile Include="Controllers\ManufacturerController.cs" />
+    <Compile Include="Controllers\ModelController.cs" />
+    <Compile Include="Controllers\PaperTypeController.cs" />
+    <Compile Include="Controllers\DeviceController.cs" />
+    <Compile Include="Controllers\PrintKindController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="Controllers\SizePaperController.cs" />
+    <Compile Include="Controllers\TagController.cs" />
+    <Compile Include="Controllers\TagTypeController.cs" />
     <Compile Include="Mappers\CommonMapper.cs" />
     <Compile Include="Mappers\IMapper.cs" />
     <Compile Include="Models\Proxy\Application.cs" />
+    <Compile Include="Models\Proxy\Component.cs" />
     <Compile Include="Models\Proxy\Employee.cs" />
     <Compile Include="Models\Proxy\Department.cs" />
+    <Compile Include="Models\Proxy\FieldSetting.cs" />
     <Compile Include="Models\Proxy\IBaseObject.cs" />
     <Compile Include="Models\Proxy\Job.cs" />
+    <Compile Include="Models\Proxy\Manufacturer.cs" />
+    <Compile Include="Models\Proxy\Model.cs" />
+    <Compile Include="Models\Proxy\SizePaper.cs" />
+    <Compile Include="Models\Proxy\TagType.cs" />
+    <Compile Include="Models\Proxy\Tag.cs" />
     <Compile Include="Models\SQLRepository\JobSQLRepository.cs" />
     <Compile Include="Models\SQLRepository\DictionariesSQLRepository.cs" />
+    <Compile Include="Models\SQLRepository\SettingsSQLRepository.cs" />
     <Compile Include="Models\Validation\IsNumericAttribute.cs" />
-    <Compile Include="Models\ViewModels\BaseView.cs" />
-    <Compile Include="Models\ViewModels\ReportSettingsView .cs" />
-    <Compile Include="Models\ViewModels\SettingsView.cs" />
-    <Compile Include="Models\ViewModels\PrinterView.cs" />
-    <Compile Include="Models\ViewModels\DeviceTypeView.cs" />
-    <Compile Include="Models\ViewModels\PaperTypeView.cs" />
-    <Compile Include="Models\ViewModels\JobView.cs" />
     <Compile Include="Models\Proxy\DeviceType.cs" />
     <Compile Include="Models\Proxy\PaperType.cs" />
-    <Compile Include="Models\Proxy\Printer.cs" />
+    <Compile Include="Models\Proxy\Device.cs" />
     <Compile Include="Models\SQLRepository\PrinterSQLRepository.cs" />
     <Compile Include="Models\IRepository.cs" />
-    <Compile Include="PrintStatData.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PrintStatData.dbml</DependentUpon>
-    </Compile>
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\ViewModels\ApplicationView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\ViewModels\BaseView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\ViewModels\CartridgeColorView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\ViewModels\ComponentView.cs" />
+    <Compile Include="Models\ViewModels\ModelConsumable.cs" />
+    <Compile Include="Models\ViewModels\DeviceConsumableView.cs" />
+    <Compile Include="Models\ViewModels\ProfileView.cs" />
+    <Compile Include="Models\ViewModels\ReportSettingsResoursesView.cs" />
+    <Compile Include="Models\ViewModels\TypeConsumableView.cs" />
+    <Compile Include="Models\ViewModels\ConsumableView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\ViewModels\DepartmentView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\ViewModels\DeviceTypeView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\ViewModels\DeviceView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\ViewModels\EmployeeView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\ViewModels\FieldSettingView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\ViewModels\JobView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\ViewModels\ManufacturerView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\ViewModels\ModelView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\ViewModels\PaperTypeView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\ViewModels\PrintKindView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\ViewModels\ReportSettingsView .cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\ViewModels\SettingsView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\ViewModels\SizePaperView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\ViewModels\TagTypeView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\ViewModels\TagView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PrintStatData.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrintStatData.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\images.jpg" />
+    <Content Include="Content\themes\base\images\switch.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -265,48 +365,24 @@
     <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
-    <Content Include="Content\themes\base\jquery-ui.css" />
-    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
-    <Content Include="Content\themes\base\jquery.ui.all.css" />
-    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
-    <Content Include="Content\themes\base\jquery.ui.base.css" />
-    <Content Include="Content\themes\base\jquery.ui.button.css" />
-    <Content Include="Content\themes\base\jquery.ui.core.css" />
-    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
-    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
-    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
-    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
-    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
-    <Content Include="Content\themes\base\jquery.ui.slider.css" />
-    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
-    <Content Include="Content\themes\base\jquery.ui.theme.css" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
-    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
-    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
-    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
-    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
-    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
-    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\sweetalert.css" />
+    <Content Include="Content\themes\multi-select.css" />
+    <Content Include="Content\themes\jquery.datetimepicker.css" />
+    <Content Include="Content\themes\jquery.tokenize.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\themes\jquery-ui.css" />
     <Content Include="DB\DB.sql" />
+    <Content Include="DB\script.sql" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="PrintStatData.dbml">
@@ -314,12 +390,22 @@
       <LastGenOutput>PrintStatData.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
-    <None Include="Scripts\jquery-1.8.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.8.2.js" />
-    <Content Include="Scripts\jquery-1.8.2.min.js" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\AddPrinterJob.js" />
+    <Content Include="Scripts\Consumable.js" />
+    <Content Include="Scripts\createDevice.js" />
+    <Content Include="Scripts\EditModelScript.js" />
+    <Content Include="Scripts\i18n\jquery.ui.datepicker-ru.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery-ui-1.8.24.js" />
-    <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
+    <Content Include="Scripts\jquery.datetimepicker.js" />
+    <Content Include="Scripts\jquery.multi-select.js" />
+    <Content Include="Scripts\jquery.quicksearch.js" />
+    <Content Include="Scripts\jquery.tokenize.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -329,6 +415,8 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\openDialog.js" />
+    <Content Include="Scripts\sweetalert.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -370,10 +458,10 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\table.snippet" />
     <Content Include="Snippets\sqltable.snippet" />
-    <Content Include="Views\Paper\Index.cshtml" />
+    <Content Include="Views\SizePaper\Index.cshtml" />
     <Content Include="Views\DeviceType\Index.cshtml" />
-    <Content Include="Views\Paper\CreatePaperType.cshtml" />
-    <Content Include="Views\Paper\EditPaperType.cshtml" />
+    <Content Include="Views\SizePaper\CreateSizePaper.cshtml" />
+    <Content Include="Views\SizePaper\EditSizePaper.cshtml" />
     <Content Include="Views\Dictionary\Index.cshtml" />
     <Content Include="Views\DeviceType\CreateDeviceType.cshtml" />
     <Content Include="Views\DeviceType\EditDeviceType.cshtml" />
@@ -381,11 +469,68 @@
     <Content Include="Views\Home\CreatePrinterJob.cshtml" />
     <Content Include="Views\Home\EditPlotterJob.cshtml" />
     <Content Include="Views\Home\EditPrinterJob.cshtml" />
-    <Content Include="Views\Printer\Index.cshtml" />
-    <Content Include="Views\Printer\CreatePrinter.cshtml" />
-    <Content Include="Views\Printer\EditPrinter.cshtml" />
-    <Content Include="Views\Settings\Index.cshtml" />
+    <Content Include="Views\Device\Index.cshtml" />
+    <Content Include="Views\Device\CreateDevice.cshtml" />
+    <Content Include="Views\Device\EditDevice.cshtml" />
+    <Content Include="Views\Profile\EditProfile.cshtml" />
     <Content Include="Views\Report\ExportJobs.cshtml" />
+    <Content Include="Views\PaperType\Index.cshtml" />
+    <Content Include="Views\PaperType\EditPaperType.cshtml" />
+    <Content Include="Views\PaperType\CreatePaperType.cshtml" />
+    <Content Include="Views\PrintKind\Index.cshtml" />
+    <Content Include="Views\PrintKind\EditPrintKind.cshtml" />
+    <Content Include="Views\PrintKind\CreatePrintKind.cshtml" />
+    <Content Include="Views\CartridgeColor\Index.cshtml" />
+    <Content Include="Views\CartridgeColor\EditCartridgeColor.cshtml" />
+    <Content Include="Views\CartridgeColor\CreateCartridgeColor.cshtml" />
+    <Content Include="Views\Component\CreateComponent.cshtml" />
+    <Content Include="Views\Component\EditComponent.cshtml" />
+    <Content Include="Views\Component\Index.cshtml" />
+    <Content Include="Views\Department\CreateDepartment.cshtml" />
+    <Content Include="Views\Department\EditDepartment.cshtml" />
+    <Content Include="Views\Department\Index.cshtml" />
+    <Content Include="Views\Employee\CreateEmployee.cshtml" />
+    <Content Include="Views\Employee\EditEmployee.cshtml" />
+    <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\FieldSetting\EditFieldSetting.cshtml" />
+    <Content Include="Views\FieldSetting\CreateFieldSetting.cshtml" />
+    <Content Include="Views\FieldSetting\Index.cshtml" />
+    <Content Include="Snippets\table.snippet" />
+    <Content Include="Snippets\Controller.snippet" />
+    <Content Include="Views\Tag\Index.cshtml" />
+    <Content Include="Views\Tag\CreateTag.cshtml" />
+    <Content Include="Views\Tag\EditTag.cshtml" />
+    <Content Include="Views\TagType\CreateTagType.cshtml" />
+    <Content Include="Views\TagType\EditTagType.cshtml" />
+    <Content Include="Views\TagType\Index.cshtml" />
+    <Content Include="Views\Application\CreateApplication.cshtml" />
+    <Content Include="Views\Application\EditApplication.cshtml" />
+    <Content Include="Views\Application\Index.cshtml" />
+    <Content Include="Views\Manufacturer\CreateManufacturer.cshtml" />
+    <Content Include="Views\Manufacturer\EditManufacturer.cshtml" />
+    <Content Include="Views\Manufacturer\Index.cshtml" />
+    <Content Include="Views\Model\CreateModel.cshtml" />
+    <Content Include="Views\Model\EditModel.cshtml" />
+    <Content Include="Views\Model\Index.cshtml" />
+    <Content Include="Views\Model\partialTagView.cshtml" />
+    <Content Include="Views\Model\PartialCreateModel.cshtml" />
+    <Content Include="Scripts\partialCreateModel.js" />
+    <Content Include="Views\TypeConsumable\CreateTypeConsumable.cshtml" />
+    <Content Include="Views\TypeConsumable\EditTypeConsumable.cshtml" />
+    <Content Include="Views\TypeConsumable\Index.cshtml" />
+    <Content Include="Views\Consumable\EditConsumable.cshtml" />
+    <Content Include="Views\Consumable\Index.cshtml" />
+    <Content Include="Views\Consumable\CreateConsumable.cshtml" />
+    <Content Include="Views\Job\partialJobPaginator.cshtml" />
+    <Content Include="Views\Profile\index.cshtml" />
+    <Content Include="Views\Device\EditDeviceConsumable.cshtml" />
+    <Content Include="Views\Shared\ErrorView.cshtml" />
+    <Content Include="Views\Device\partialDeviceConsumable.cshtml" />
+    <Content Include="Views\Home\Index1.cshtml" />
+    <Content Include="Views\Home\View1.cshtml" />
+    <Content Include="Views\Model\partialModelConsumable.cshtml" />
+    <Content Include="Views\Profile\CreateProfile.cshtml" />
+    <Content Include="Views\Report\ExportResourses.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

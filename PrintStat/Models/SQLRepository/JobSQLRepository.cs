@@ -19,6 +19,7 @@ namespace PrintStat.Models
             }
         }
 
+
         public bool CreateJob(Job instance)
         {
 

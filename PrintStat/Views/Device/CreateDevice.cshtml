@@ -1,0 +1,98 @@
+﻿@model PrintStat.Models.ViewModels.DeviceView
+
+
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryui")
+@Scripts.Render("~/bundles/Dialog")
+@*@Styles.Render("~/Content/themes/base/images/css")*@
+
+<script src="~/Scripts/createDevice.js"></script>
+
+
+
+
+
+
+@using (Html.BeginForm("CreateDevice", "Device", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <h2>Добавление устройства</h2>
+    <fieldset>
+        <div class="control-group">
+
+            <label class="control-label" for="ModelID">
+                Производитель
+            </label>
+            
+
+            
+            <div class="styled-select">
+                <div class="ui-widget">
+                    @Html.TextBox("Manufacturer", "", new {@class = "table_width_textbox", placeholder="Начните вводить"})
+                </div>
+            </div>
+
+            <label class="control-label" for="ModelID">
+                Модель
+            </label>
+
+            <div class="styled-select">
+
+                @Html.DropDownListFor(x => x.ModelID, new SelectList(Model.models, "ID", "Name"), "Пожалуйста выберите модель")
+                <input id="openDialog" type="button" value="Добавить модель" onclick=" showAddModel(); " style="width: 130pt"/>
+            </div>
+            <div id="dialogDivModel"></div>
+
+            <label class="control-label" for="Name">
+                Наименование
+            </label>
+
+            <div class="controls">
+                @Html.TextBox("Name", Model.Name)
+                @Html.ValidationMessage("Name")
+            </div>
+
+            <label class="control-label" for="Sn">
+                Серийный номер
+            </label>
+
+            <div class="controls">
+                @Html.TextBox("Sn", Model.Sn)
+                @Html.ValidationMessage("Sn")
+            </div>
+
+
+
+            <label class="control-label" for="SearchString">
+                Поисковая строка
+            </label>
+
+            <div class="controls">
+                @Html.TextBox("SearchString", Model.SearchString)
+                @Html.ValidationMessage("SearchString")
+            </div>
+
+            <label class="control-label" for="InvNumber">
+                Инв. номер
+            </label>
+
+            <div class="controls" style="width: 160px">
+                @Html.TextBox("InvNumber", Model.InvNumber)
+                @Html.ValidationMessage("InvNumber")
+            </div>
+
+            <div class="controls">
+                @Html.CheckBox("StatisticsSupported", Model.StatisticsSupported)
+                поддерживает сбор статистики
+                @Html.ValidationMessage("StatisticsSupported")
+            </div>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                Создать
+            </button>
+            @Html.ActionLink("Отмена", "Index", null, null, new {@class = "btn"})
+        </div>
+    </fieldset>
+
+}

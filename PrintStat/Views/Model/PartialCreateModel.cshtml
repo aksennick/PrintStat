@@ -1,0 +1,146 @@
+﻿<script src="~/Scripts/partialCreateModel.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link href="~/Content/themes/multi-select.css" rel="stylesheet" />
+@Scripts.Render("~/bundles/multiselect")
+@Scripts.Render("~/bundles/quicksearch")
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#tabs").tabs({
+            collapsible: true
+        });
+    });
+</script>
+@using (Html.BeginForm("CreateModel", "Model", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <fieldset>
+        <div class="control-group">
+            <label class="control-label" for="ManufacturerID">
+                Производитель
+            </label>
+            <div class="styled-select">
+                @Html.TextBox("ManufacturerID", "", new { @class = "table_width_textbox" })
+            </div>
+
+            <label class="control-label" for="Name">
+                Наименование модели
+            </label>
+
+            <div class="controls">
+                <input type="text" id="NameModel" value=''>
+                @Html.ValidationMessage("Name")
+            </div>
+
+            <label class="control-label" for="DeviceTypeID">
+                Тип устройства
+            </label>
+            <div class="styled-select">
+                @Html.DropDownList("DeviceTypeID", new SelectList(ViewBag.DeviceTypes, "ID", "Name"))
+            </div>
+
+            <label class="control-label" for="PrintKindID">
+                Вид печати
+            </label>
+            <div class="styled-select">
+                @Html.DropDownList("PrintKindID", new SelectList(ViewBag.PrintKinds, "ID", "Name"))
+            </div>
+            <br/>
+            <div id="tabs" style="width: 500px">
+                <ul>
+                    <li><a href="#tabs-1">Комплектующие</a></li>
+                    <li><a href="#tabs-2">Теги</a></li>
+                    <li><a href="#tabs-3">Типоразмер</a></li>
+                    <li><a href="#tabs-4">Тип бумаги</a></li>
+                </ul>
+
+                <div id="tabs-1">
+                    <select id="ms1" name="ChosenConsIds" multiple='multiple'>
+                        @{
+    foreach (var item in ViewBag.Consumables)
+    {
+        <option value='@item.ID'>@item.Name</option>
+    }
+                        }
+                    </select>
+                </div>
+
+                <div id="tabs-2">
+
+                    <select id="ms2" name="ChosenTagIds" multiple='multiple'>
+                        @{
+    foreach (var item in ViewBag.Tags)
+    {
+        <option value='@item.ID'>@item.Name</option>
+    }
+                        }
+                    </select>
+                </div>
+                <div id="tabs-3">
+                    <select id="ms3" name="ChosenSizePaperIds" multiple='multiple'>
+                        @{
+    foreach (var item in ViewBag.SizePapers)
+    {
+        <option value='@item.ID'>@item.Name</option>
+    }
+                        }
+                    </select>
+
+
+                </div>
+                <div id="tabs-4">
+                    <select id="ms4" name="ChosenPaperTypeIds" multiple='multiple'>
+                        @{
+    foreach (var item in ViewBag.PaperTypes)
+    {
+        <option value='@item.ID'>@item.Name</option>
+    }
+                        }
+                    </select>
+                </div>
+
+            </div>
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+
+
+
+                    $('#ms1,#ms2,#ms3,#ms4').multiSelect({
+                        selectableHeader: "<input type='text' class='search-input' autocomplete='off' placeholder='поиск по значению'>",
+                        selectionHeader: "<input type='text' class='search-input' autocomplete='off' placeholder='поиск по значению'>",
+                        afterInit: function (ms) {
+                            var that = this,
+                                $selectableSearch = that.$selectableUl.prev(),
+                                $selectionSearch = that.$selectionUl.prev(),
+                                selectableSearchString = '#' + that.$container.attr('id') + ' .ms-elem-selectable:not(.ms-selected)',
+                                selectionSearchString = '#' + that.$container.attr('id') + ' .ms-elem-selection.ms-selected';
+
+                            that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
+                                .on('keydown', function (e) {
+                                    if (e.which === 40) {
+                                        that.$selectableUl.focus();
+                                        return false;
+                                    }
+                                });
+
+                            that.qs2 = $selectionSearch.quicksearch(selectionSearchString)
+                                .on('keydown', function (e) {
+                                    if (e.which == 40) {
+                                        that.$selectionUl.focus();
+                                        return false;
+                                    }
+                                });
+                        },
+                        afterSelect: function () {
+                            this.qs1.cache();
+                            this.qs2.cache();
+                        },
+                        afterDeselect: function () {
+                            this.qs1.cache();
+                            this.qs2.cache();
+                        }
+                    });
+                });
+            </script>
+        </div>
+    </fieldset>
+}

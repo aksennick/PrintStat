@@ -1,0 +1,36 @@
+<CodeSnippets
+    xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0" >
+    <Header>
+      <Title>
+        Table
+      </Title>
+      <Shortcut>Table</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>Table</ID>
+          <ToolTip>Table name for create.</ToolTip>
+          <Default>Table</Default>
+        </Literal>
+      </Declarations>
+
+      <Code Language="CSharp">
+        <![CDATA[
+		#region $Table$
+
+        IQueryable<$Table$> $Table$s { get; }
+
+        bool Create$Table$($Table$ instance);
+
+        bool Update$Table$($Table$ instance);
+
+        bool Remove$Table$(int id$Table$);
+
+        #endregion 
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets> 

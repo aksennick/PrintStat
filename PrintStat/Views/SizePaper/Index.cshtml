@@ -1,0 +1,58 @@
+﻿@model IList<PrintStat.SizePaper>
+@{
+    ViewBag.Title = "Типоразмеры бумаги";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Типоразмеры бумаги</h2>
+
+<p>
+    <div class="menu">
+        <a href="@Url.Action("CreateSizePaper", "SizePaper")">Добавить типоразмер бумаги</a>
+    </div>
+
+</p>
+
+<p>
+    <table>
+        <thead>
+            <tr>
+                <th>Наименование</th>
+                <th>Ширина, см</th>
+                <th>Длина, см</th>
+
+                <th>Редакция</th>
+                <th>Удаление</th>
+            </tr>
+        </thead>
+        @if (Model != null)
+        {
+            foreach (var papersize in Model)
+            {
+                <tr>
+                    <td width="200">
+                        @papersize.Name
+                    </td>
+                    <td width="80">
+                        @papersize.Width_cm
+                    </td>
+
+                    <td width="80">
+                        @papersize.Height_cm
+                    </td>
+                
+                    <td width="80">
+                        <a href="@Url.Action("EditSizePaper", "SizePaper", new {id = @papersize.ID})">●</a>
+                    </td>
+                    <td width="80">
+                        <a href="@Url.Action("DeleteSizePaper", "SizePaper", new {id = @papersize.ID})"><font color="red">●</font></a>
+                    </td>
+                </tr>
+            }
+            
+        }
+    </table>
+</p>
+
+
+

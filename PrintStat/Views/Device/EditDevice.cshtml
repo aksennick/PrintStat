@@ -1,0 +1,70 @@
+﻿@model PrintStat.Models.ViewModels.DeviceView
+
+@using (Html.BeginForm("Editdevice", "Device", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <h2>
+        Редактирование устройства печати
+    </h2>
+    <fieldset>
+        <div class="control-group">
+            <label class="control-label" for="ModelID">
+                Модель
+            </label>
+
+            <div class="styled-select">
+                @Html.DropDownList("ModelID", new SelectList(ViewBag.Models, "ID", "Name"))
+            </div>
+
+            <label class="control-label" for="Name">
+                Номер модели
+            </label>
+
+            <div class="controls">
+                @Html.TextBox("Name", Model.Name)
+                @Html.ValidationMessage("Name")
+            </div>
+
+            <label class="control-label" for="Sn">
+                Серийный номер
+            </label>
+
+            <div class="controls">
+                @Html.TextBox("Sn", Model.Sn)
+                @Html.ValidationMessage("Sn")
+            </div>
+
+
+
+            <label class="control-label" for="SearchString">
+                Поисковая строка
+            </label>
+
+            <div class="controls">
+                @Html.TextBox("SearchString", Model.SearchString)
+                @Html.ValidationMessage("SearchString")
+            </div>
+
+            <label class="control-label" for="InvNumber">
+                Инв. номер
+            </label>
+
+            <div class="controls" style="width: 160px">
+                @Html.TextBox("InvNumber", Model.InvNumber)
+                @Html.ValidationMessage("InvNumber")
+            </div>
+
+            <div class="controls">
+                @Html.CheckBox("StatisticsSupported", Model.StatisticsSupported)
+                поддерживает сбор статистики
+                @Html.ValidationMessage("StatisticsSupported")
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                Изменить
+            </button>
+            @Html.ActionLink("Отмена", "Index", null, null, new { @class = "btn" })
+        </div>
+    </fieldset>
+}

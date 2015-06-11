@@ -1,0 +1,101 @@
+﻿@model PrintStat.Models.ViewModels.ProfileView
+
+
+@using (Html.BeginForm("EditProfile", "Profile", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <fieldset>
+        <h2>
+            Настройки @ViewBag.Title
+        </h2>
+
+        @{
+    int i = -1;
+    foreach (var item in Model.SettingVals)
+    {
+        i++;
+
+        switch (item.setting)
+        {
+            case "Порт":
+                <label class="control-label">
+                    @item.setting
+                </label>
+
+                <div class="controls" id="@item.idValue">
+                    @Html.HiddenFor(m => m.SettingVals[i].idValue)
+                    @Html.TextBoxFor(m => m.SettingVals[i].value, new { type = "number", required = "required", maxlength = "50" })
+
+
+                </div>
+                break;
+            case "E-mail адрес":
+
+                        <label class="control-label">
+                            @item.setting
+                        </label>
+
+                        <div class="controls" id="@item.idValue">
+                            @Html.HiddenFor(m => m.SettingVals[i].idValue)
+                            @Html.TextBoxFor(m => m.SettingVals[i].value, new { type = "email", required = "required",  maxlength = "50" })
+                        
+
+                        </div>
+
+                        break;
+                    case "Пароль":
+
+                    <label class="control-label">
+                        @item.setting
+                    </label>
+
+                    <div class="controls" id="@item.idValue">
+                        @Html.HiddenFor(m => m.SettingVals[i].idValue)
+                        @Html.TextBoxFor(m => m.SettingVals[i].value, new { type = "password", required = "required", maxlength = "50" })
+                    </div>
+
+                        break;
+                        
+                    case "Протокол":
+                        <label class="control-label">
+                            @item.setting
+                        </label>
+              
+
+                
+                        <div class="styled-select" id="@item.idValue">
+                            @Html.HiddenFor(m => m.SettingVals[i].idValue)
+                            @Html.DropDownListFor(m => m.SettingVals[i].value, new SelectList(ViewBag.Protocols, "Value", "Text", item.value),"Выберите протокол", new {  required = "required"})
+                            @Html.ValidationMessageFor(m => m.SettingVals[i].value)
+                        </div>
+                        break;
+                                                                                      
+                        default:
+                        <label class="control-label">
+                            @item.setting
+                        </label>
+
+                        <div class="controls" id="@item.idValue">
+                            @Html.HiddenFor(m => m.SettingVals[i].idValue)
+                            @Html.TextBoxFor(m => m.SettingVals[i].value, new { type = "text", required = "required", maxlength = "50" })
+
+                            @Html.ValidationMessageFor(m => m.SettingVals[i].value)
+
+                        </div>
+                        break;
+                        }
+
+                        }
+
+
+                        }
+
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                Изменить
+                            </button>
+                            @Html.ActionLink("Отмена", "Index", null, null, new { @class = "btn" })
+                        </div>
+
+</fieldset>
+}
