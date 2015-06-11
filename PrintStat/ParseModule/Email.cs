@@ -11,6 +11,7 @@ namespace PrintStat.ParseModule
 
     public class Email
     {
+
         private static ImapClient imapClient = null;
         private static IEnumerable<string> mailboxes;
         private static IEnumerable<uint> mailIDs;

@@ -44,6 +44,7 @@ namespace PrintStat.ParseModule
                 }
                 if (k.Value.Subject == "FS-C8600DN log")
                 {
+
                     source = new SourceFSXml();
                     source.parce(k);
                     //ParseXmlFS(k);

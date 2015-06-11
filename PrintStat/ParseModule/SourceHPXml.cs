@@ -41,6 +41,7 @@ namespace PrintStat.ParseModule
                         j.Name = GetAtribute(x, "JOB_NAME", "value");
                         try
                         {
+
                             j.ApplicationID = context.Application.FirstOrDefault(p => p.Name == GetAtribute(x, "APPLICATION_ID", "value")).ID;//a.ID;
                         }
                         catch (Exception ex)

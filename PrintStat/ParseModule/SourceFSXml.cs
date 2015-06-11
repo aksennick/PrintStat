@@ -21,6 +21,7 @@ namespace PrintStat.ParseModule
         //}
         public override void parce(KeyValuePair<uint, MailMessage> message)
         {
+
             var context = new PrintStatDataDataContext();
 
             foreach (var attach in message.Value.Attachments)
