@@ -15,63 +15,93 @@ namespace PrintStat.ParseModule
 {
     public class SourceFSXml:Source
     {
-        //public SourceHPXml()
-        //{
 
-        //}
-        public override void parce(KeyValuePair<uint, MailMessage> message)
+        public SourceFSXml(KeyValuePair<uint, MailMessage> mes)
+            : base(mes)
         {
-
-            var context = new PrintStatDataDataContext();
-
-            foreach (var attach in message.Value.Attachments)
+            //UPID = context.Device.FirstOrDefault(p => p.SearchString == "hp").ID;
+            mID = context.Device.FirstOrDefault(p => p.SearchString == "FS").ModelID;
+        }
+        public override void GetValueTag(Tag t, Job j, XmlElement x)
+        {
+            j.DeviceID = context.Device.FirstOrDefault(p => p.SearchString == "fs").ID;
+            switch (t.Name)
             {
-                XmlDocument xml = new XmlDocument();
+                case "Задание":
+                    {
+                        j.Name = GetInnerText(x, t.Tag1);
+                        break;
+                    }
+                case "Страницы":
+                    {
+                        j.Pages = Convert.ToInt32(GetInnerText(x, t.Tag1));
+                        break;
+                    }
+                case "Копии":
+                    {
+                        j.Copies = Convert.ToInt32(GetInnerText(x, t.Tag1));
+                        break;
+                    }
+                case "Время начала":
+                    {
+                        j.StartTime = new DateTime(Convert.ToInt32(GetInnerText((XmlElement)x.GetElementsByTagName(t.Tag1)[0], "kmloginfo:year")),
+                                                    Convert.ToInt32(GetInnerText((XmlElement)x.GetElementsByTagName(t.Tag1)[0], "kmloginfo:month")),
+                                                    Convert.ToInt32(GetInnerText((XmlElement)x.GetElementsByTagName(t.Tag1)[0], "kmloginfo:day")),
+                                                    Convert.ToInt32(GetInnerText((XmlElement)x.GetElementsByTagName(t.Tag1)[0], "kmloginfo:hour")),
+                                                    Convert.ToInt32(GetInnerText((XmlElement)x.GetElementsByTagName(t.Tag1)[0], "kmloginfo:minute")),
+                                                    Convert.ToInt32(GetInnerText((XmlElement)x.GetElementsByTagName(t.Tag1)[0], "kmloginfo:second")));
+                       break;
+                    }
+                case "Время окончания":
+                    {
+                        j.EndTime = new DateTime(Convert.ToInt32(GetInnerText((XmlElement)x.GetElementsByTagName(t.Tag1)[0], "kmloginfo:year")),
+                                                    Convert.ToInt32(GetInnerText((XmlElement)x.GetElementsByTagName(t.Tag1)[0], "kmloginfo:month")),
+                                                    Convert.ToInt32(GetInnerText((XmlElement)x.GetElementsByTagName(t.Tag1)[0], "kmloginfo:day")),
+                                                    Convert.ToInt32(GetInnerText((XmlElement)x.GetElementsByTagName(t.Tag1)[0], "kmloginfo:hour")),
+                                                    Convert.ToInt32(GetInnerText((XmlElement)x.GetElementsByTagName(t.Tag1)[0], "kmloginfo:minute")),
+                                                    Convert.ToInt32(GetInnerText((XmlElement)x.GetElementsByTagName(t.Tag1)[0], "kmloginfo:second")));
+                        break;
+                    }                      
+                
+                case "Выполнил":
+                    {
+                        try
+                        {
+                            j.UserTabNumber = context.Employee.First(p => p.TabNumber == GetInnerText(x, t.Tag1)).TabNumber;
+                        }
+                        catch
+                        {
+                            j.UserTabNumber = "1369";
+                        }
+                        break;
+                    }
+            }
+
+        }
+
+        public override void parce()
+        {
+            var mt = context.ModelTag.Where(t => t.ModelID == mID);
+            foreach (var attach in message.Value.Attachments)
+            {XmlDocument xml = new XmlDocument();
 
                 xml.Load(attach.ContentStream);
 
                 foreach (XmlElement x in xml.GetElementsByTagName("kmloginfo:print_job_log"))
                 {
-                    var j = new Job();
-                    //xml.GetElementsByTagName("Product_Name")[0].InnerText;//Принтер
-                    j.DeviceID = context.Device.FirstOrDefault(p => p.SearchString == "FS").ID;
-                    j.Name = GetInnerText(x, "kmloginfo:job_name");
-                   
-                    j.Pages = Convert.ToInt32(GetInnerText(x,"kmloginfo:complete_pages"));
+                        var j = new Job();
 
-                    j.Copies = Convert.ToInt32(GetInnerText(x, "kmloginfo:complete_copies"));
-
-
-                    j.StartTime = new DateTime(Convert.ToInt32(GetInnerText((XmlElement)x.GetElementsByTagName("kmloginfo:start_time")[0], "kmloginfo:year")),
-                                                    Convert.ToInt32( GetInnerText((XmlElement)x.GetElementsByTagName("kmloginfo:start_time")[0], "kmloginfo:month")) ,
-                                                    Convert.ToInt32(  GetInnerText((XmlElement)x.GetElementsByTagName("kmloginfo:start_time")[0], "kmloginfo:day")),
-                                                    Convert.ToInt32(  GetInnerText((XmlElement)x.GetElementsByTagName("kmloginfo:start_time")[0], "kmloginfo:hour")),
-                                                    Convert.ToInt32(  GetInnerText((XmlElement)x.GetElementsByTagName("kmloginfo:start_time")[0], "kmloginfo:minute")),
-                                                    Convert.ToInt32(  GetInnerText((XmlElement)x.GetElementsByTagName("kmloginfo:start_time")[0], "kmloginfo:second")));
-                    //j.StartTime = DateTime.ParseExact(dat,"yyMMddHHmmss", CultureInfo.InvariantCulture);
-
-                    j.EndTime = new DateTime(Convert.ToInt32(GetInnerText((XmlElement)x.GetElementsByTagName("kmloginfo:end_time")[0], "kmloginfo:year")),
-                                                    Convert.ToInt32(GetInnerText((XmlElement)x.GetElementsByTagName("kmloginfo:end_time")[0], "kmloginfo:month")),
-                                                    Convert.ToInt32(GetInnerText((XmlElement)x.GetElementsByTagName("kmloginfo:end_time")[0], "kmloginfo:day")),
-                                                    Convert.ToInt32(GetInnerText((XmlElement)x.GetElementsByTagName("kmloginfo:end_time")[0], "kmloginfo:hour")),
-                                                    Convert.ToInt32(GetInnerText((XmlElement)x.GetElementsByTagName("kmloginfo:end_time")[0], "kmloginfo:minute")),
-                                                    Convert.ToInt32(GetInnerText((XmlElement)x.GetElementsByTagName("kmloginfo:end_time")[0], "kmloginfo:second")));
-                    try
-                    {
-                        j.UserTabNumber = context.Employee.FirstOrDefault(p => p.ID == Convert.ToInt32(GetInnerText(x, "kmloginfo:user_name"))).ID.ToString();
-                    }
-                    catch
-                    {
-                        j.UserTabNumber = "1369";
-                    }
-                    j.ApplicationID = context.Application.First(p => p.Name == "Default").ID;
-                    context.Job.InsertOnSubmit(j);
-                    context.SubmitChanges();
+                        foreach (ModelTag tag in mt)
+                        {
+                            GetValueTag(tag.Tag, j, x);
+                        }
+                        j.Duration = Convert.ToInt32((j.StartTime.Value - j.StartTime.Value).TotalMinutes);
+                        j.ApplicationID = context.Application.FirstOrDefault(p => p.Name == "Default").ID;
+                        context.Job.InsertOnSubmit(j);
+                        context.SubmitChanges();
+                    
                 }
             }
-
-                //XmlDocument xml = new XmlDocument();
-                //xml.Load(attach.ContentStream);
         }
     }
 }

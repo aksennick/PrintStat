@@ -16,13 +16,17 @@ namespace PrintStat.ParseModule
 {
     public class Source
     {
-        public Source()
+        public Source(KeyValuePair<uint, MailMessage>  mes)
         {
-
+            context = new PrintStatDataDataContext();
+            message = mes;        
             
         }
-
-
+        public KeyValuePair<uint, MailMessage>  message;
+        //public TempJob job;
+        public PrintStatDataDataContext context;
+        public int UPID;
+        public int mID;
         public string GetAtribute(XmlElement x, string tag, string attName)
         {
             string result = "";
@@ -40,9 +44,13 @@ namespace PrintStat.ParseModule
         {
             return x.GetElementsByTagName(tag)[0].InnerText;
         }
-        public virtual void parce(KeyValuePair<uint, MailMessage> message)
+        public virtual void GetValueTag(Tag t, Job j, XmlElement x)
         {
 
+        }
+        public virtual void parce()
+        {
+       
         }
     }
 }

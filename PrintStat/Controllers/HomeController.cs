@@ -15,10 +15,10 @@ namespace PrintStat.Controllers
     public class HomeController : BaseController
     {
 
-        public void GetMail()
+        public ActionResult GetMail()
         {
             (new ParseModule.GetData(new DateTime(2015,06,01),DateTime.Now)).GetSource();
-            //return View();
+            return View("Index");
         }
         public ActionResult Index(int page=1)
         {

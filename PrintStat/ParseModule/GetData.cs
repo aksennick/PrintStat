@@ -38,19 +38,20 @@ namespace PrintStat.ParseModule
                 //listBox1.Items.Add(k.Value.Subject);
                 if (k.Value.Subject == "Accounting report. Printer Serial Number: CN314DH01B")
                 {
-                    source = new SourceHPXml();
-                    source.parce(k);
+                    source = new SourceHPXml(k);
+                    source.parce();
                     //ParseXmlHP(k);
                 }
                 if (k.Value.Subject == "FS-C8600DN log")
                 {
 
-                    source = new SourceFSXml();
-                    source.parce(k);
+                    source = new SourceFSXml(k);
+                    source.parce();
                     //ParseXmlFS(k);
                 }
 
             }
+            em.LogOut();
         }
     }
 }
